@@ -59,7 +59,8 @@ You should see output similar to this:
 * creating lib/simple_server/application.ex
 * creating test
 * creating test/test_helper.exs
-* creating test/simple_server_test.exs```
+* creating test/simple_server_test.exs
+```
 
 Your Mix project was created successfully.
 You can use "mix" to compile it, test it, and more:
@@ -91,14 +92,17 @@ Inside the deps function, add the packages we intend to use.
   {:poison, "~> 3.1"}
 ]
 end
+```
+
 Inside the application function, add our dependencies to extra_applications
 
-def application do
+```def application do
 [
   extra_applications: [:logger, :cowboy, :plug, :poison],
   mod: {SimpleServer.Application, []}
 ]
-end```
+end
+```
 Now that’s we’ve added our dependencies, we need to use Mix to download and install them. In your terminal, run this command the download the dependencies we just added to the mix.exs file:
 
 ```$ mix deps.get```
@@ -124,7 +128,8 @@ Open this new file and fill it in with the following:
   plug(:dispatch)
 
   # TODO: add routes!
-end ```
+end 
+```
 This code defines the module SimpleServer.Router and sets up our Plug dependency. Now we need to add some routes for the server.
 
 Adding Routes
@@ -171,7 +176,8 @@ IEx is Elixir’s interactive shell. The -S mix option tells IEx to execute the 
 ...
 ==> simple_server
 Compiling 2 files (.ex)
-Generated simple_server app```
+Generated simple_server app
+```
 
 Now that we’re up and running, let’s send a simple GET request. You can do this with curl in your terminal or by going to http://localhost:8085/hello in your browser. If you’re using curl, run this command:
 
@@ -179,7 +185,8 @@ Now that we’re up and running, let’s send a simple GET request. You can do t
 If everything is working as it should be, you should get back the text world, and in the terminal where IEx is running, you should see some debug logging like this:
 
 ```13:25:45.811 [debug] GET /hello
-13:25:45.815 [debug] Sent 200 in 3ms```
+13:25:45.815 [debug] Sent 200 in 3ms
+```
 
 Let’s do another GET request, but this time we’ll test our route matching and default route by sending a request to http://localhost:8085/thisshouldbea404:
 
@@ -189,7 +196,8 @@ We should get a response of 404 and the text not found. In our IEx terminal, we 
 
 ``` [debug] GET /thisshouldbea404
  [debug] Sent 404 in 19µs
-yeah… that’s 19 microseconds (or 0.019 milliseconds)!!!```
+yeah… that’s 19 microseconds (or 0.019 milliseconds)!!!
+```
 
 Finally, we need to test our POST request. Our route for post "/post" isn’t exactly “production-ready” as it’s expecting a very specific request body, and as such our application will crash if it doesn’t receive a JSON body with a "message" key in it.
 
@@ -203,5 +211,6 @@ If everything worked as it was supposed to, you would get the following response
 
 ``` [debug] POST /post
 %{"message" => "hello world"}
- [debug] Sent 201 in 17ms```
+ [debug] Sent 201 in 17ms
+ ```
 
